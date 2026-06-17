@@ -1,0 +1,192 @@
+@import "tailwindcss";
+
+@theme {
+    --font-sans: var(--font-inter);
+}
+
+:root {
+    --bdo-gold: #c29543;
+    /* Assombri pour contraste sur fond clair */
+    --bdo-gold-hover: #b38b47;
+    --bg-dark: #1d1d1d;
+    /* Noir premium, demandé par l'utilisateur */
+    --bg-panel: #242424;
+    /* Gris très sombre pour les panneaux */
+    --bg-card: #2a2a2a;
+    /* Gris sombre pour les cartes */
+    --tier-naru: #4d7c0f;
+    /* Vert plus sombre */
+    --tier-tuvala: #1d4ed8;
+    /* Bleu plus sombre */
+    --tier-boss: #ca8a04;
+    /* Jaune sombre */
+    --tier-blackstar: #b91c1c;
+    /* Rouge sombre */
+    --tier-fallen: #7e22ce;
+    /* Violet sombre */
+
+    /* Animation Constants */
+    --spring-duration: 0.8s;
+    --bezier-overshoot: cubic-bezier(0.34, 1.56, 0.64, 1);
+    --bezier-smooth: cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+body {
+    background-color: var(--bg-dark);
+    color: #e9eae4;
+    /* Texte clair pour le mode sombre */
+    background-image: radial-gradient(circle at 50% -20%, rgba(194, 149, 67, 0.05) 0%, transparent 70%);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+/* Brutalisme Strict : Aucun bord arrondi */
+*,
+*::before,
+*::after {
+    border-radius: 0px !important;
+}
+
+/* Texture de Bruit (Noise Overlay) */
+.noise-overlay {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.03;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
+
+.bdo-text {
+    color: var(--bdo-gold);
+}
+
+.bdo-bg {
+    background: linear-gradient(135deg, #f3f4f6, #ffffff);
+    color: var(--bdo-gold);
+    border: 1px solid #d1d5db;
+}
+
+.panel {
+    background-color: rgba(36, 36, 36, 0.85);
+    /* rgba pour #242424 */
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border-bottom: 0.5px solid rgba(233, 234, 228, 0.2);
+    /* #e9eae4 avec opacité */
+}
+
+.card {
+    background-color: var(--bg-card) !important;
+    border: 0.5px solid #e9eae4 !important;
+    transition: all var(--spring-duration) var(--bezier-smooth);
+    box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.08);
+}
+
+.card:hover {
+    border-color: #e9eae4 !important;
+    transform: translateY(-2px);
+    box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.15), 0 0 20px rgba(194, 149, 67, 0.1);
+}
+
+/* Raretés */
+.border-naru {
+    border-left: 4px solid var(--tier-naru);
+}
+
+.border-tuvala {
+    border-left: 4px solid var(--tier-tuvala);
+}
+
+.border-boss {
+    border-left: 4px solid var(--tier-boss);
+}
+
+.border-blackstar {
+    border-left: 4px solid var(--tier-blackstar);
+}
+
+.border-fallen {
+    border-left: 4px solid var(--tier-fallen);
+}
+
+/* UI Elements */
+.search-bar {
+    background-color: rgba(0, 0, 0, 0.02);
+    border: 0.5px solid rgba(0, 0, 0, 0.05);
+    color: #1F2937;
+    padding: 10px 16px;
+    width: 100%;
+    outline: none;
+    transition: all var(--spring-duration) var(--bezier-smooth);
+}
+
+.search-bar:focus {
+    border-color: var(--bdo-gold);
+    box-shadow: 0 0 0 4px rgba(194, 149, 67, 0.1);
+    background-color: #2a2a2a;
+}
+
+/* Les tabs sont gérés dynamiquement par Framer Motion, on désactive les vieux styles */
+.tab-inactive {
+    color: #6b7280;
+    transition: color 0.4s var(--bezier-smooth);
+}
+
+.tab-inactive:hover {
+    color: white;
+}
+
+/* Scrollbar Customization */
+.no-scrollbar::-webkit-scrollbar {
+    display: none;
+}
+
+.no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #d1d5db;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #9ca3af;
+}
+
+/* Custom Checkboxes */
+input[type="checkbox"] {
+    position: relative;
+    appearance: none;
+    background-color: var(--bg-panel);
+    border: 1px solid #e9eae4;
+    transition: all 0.2s ease;
+}
+
+input[type="checkbox"]:checked {
+    background-color: var(--bdo-gold);
+    border-color: var(--bdo-gold);
+}
+
+input[type="checkbox"]:checked::after {
+    content: '';
+    position: absolute;
+    left: 5px;
+    top: 2px;
+    width: 4px;
+    height: 8px;
+    border: solid #1d1d1d;
+    /* checkmark in dark color on gold bg */
+    border-width: 0 1px 1px 0;
+    transform: rotate(45deg);
+}
