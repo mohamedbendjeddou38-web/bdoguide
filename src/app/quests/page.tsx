@@ -17,7 +17,7 @@ export default function QuestsPage() {
     setOpenQuests((prev) => ({ ...prev, [index]: !prev[index] }));
   };
 
-  const springConfig = { type: "spring", stiffness: 250, damping: 35 };
+  const springConfig = { type: "spring" as const, stiffness: 250, damping: 35 };
 
   return (
     <div className="space-y-20 pb-24">

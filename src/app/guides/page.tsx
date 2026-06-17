@@ -15,7 +15,7 @@ export default function GuidesPage() {
 
   const itemVariants = {
     hidden: { opacity: 0, y: 20 },
-    show: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 250, damping: 35 } }
+    show: { opacity: 1, y: 0, transition: { type: "spring" as const, stiffness: 250, damping: 35 } }
   };
 
   return (
