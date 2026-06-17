@@ -12,8 +12,8 @@ function cn(...inputs: ClassValue[]) {
 }
 
 // Mécaniques de Physique des Ressorts (Spring Dynamics)
-const springConfig = { type: "spring", stiffness: 250, damping: 35, mass: 1 };
-const springBounce = { type: "spring", stiffness: 400, damping: 15, mass: 0.8 };
+const springConfig = { type: "spring" as const, stiffness: 250, damping: 35, mass: 1 };
+const springBounce = { type: "spring" as const, stiffness: 400, damping: 15, mass: 0.8 };
 
 export default function TrackerPage() {
   const [progress, setProgress] = useState<Record<string, boolean>>({});
