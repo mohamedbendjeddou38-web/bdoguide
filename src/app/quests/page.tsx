@@ -17,7 +17,7 @@ export default function QuestsPage() {
     setOpenQuests((prev) => ({ ...prev, [index]: !prev[index] }));
   };
 
-  const springConfig = { type: "spring" as const, stiffness: 250, damping: 35 };
+  const springConfig = { type: "spring", stiffness: 250, damping: 35 };
 
   return (
     <div className="space-y-20 pb-24">
@@ -36,38 +36,38 @@ export default function QuestsPage() {
         {bdoData.quests.map((q, i) => {
           const isCritique = q.priority === "Critique";
           const isHaute = q.priority === "Haute";
-          
+
           const badgeColor = isCritique
-            ? "bg-[#1d1d1d] text-red-400 border-red-500/30" 
+            ? "bg-[#1d1d1d] text-red-400 border-red-500/30"
             : isHaute
-            ? "bg-[#1d1d1d] text-orange-400 border-orange-500/30"
-            : "bg-[#1d1d1d] text-blue-400 border-blue-500/30";
-            
+              ? "bg-[#1d1d1d] text-orange-400 border-orange-500/30"
+              : "bg-[#1d1d1d] text-blue-400 border-blue-500/30";
+
           const icon = isCritique ? "fa-solid fa-fire" : "fa-solid fa-circle-info";
           const isOpen = !!openQuests[i];
 
           return (
-            <motion.div 
-              key={i} 
+            <motion.div
+              key={i}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ ...springConfig, delay: i * 0.05 }}
               className="group card p-6 md:p-10 bg-[#2a2a2a]"
             >
-              <div 
+              <div
                 className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 cursor-pointer select-none"
                 onClick={() => toggleDetails(i)}
               >
                 <div className="flex-1 flex gap-6 items-center">
                   <div className={cn(
                     "w-14 h-14 flex-shrink-0 rounded-2xl flex items-center justify-center border transition-all duration-700",
-                    isCritique ? "bg-[#1d1d1d] border-red-500/30 text-red-400 group-hover:bg-red-500/10" 
-                    : isHaute ? "bg-[#1d1d1d] border-orange-500/30 text-orange-400 group-hover:bg-orange-500/10"
-                    : "bg-[#1d1d1d] border-blue-500/30 text-blue-400 group-hover:bg-blue-500/10"
+                    isCritique ? "bg-[#1d1d1d] border-red-500/30 text-red-400 group-hover:bg-red-500/10"
+                      : isHaute ? "bg-[#1d1d1d] border-orange-500/30 text-orange-400 group-hover:bg-orange-500/10"
+                        : "bg-[#1d1d1d] border-blue-500/30 text-blue-400 group-hover:bg-blue-500/10"
                   )}>
                     <i className={cn(icon, "text-2xl")} />
                   </div>
-                  
+
                   <div>
                     <h3 className="text-2xl font-bold text-[#e9eae4] tracking-tight mb-2 group-hover:text-[#c29543] transition-colors">
                       {q.title}
@@ -82,8 +82,8 @@ export default function QuestsPage() {
                   >
                     PRIORITÉ {q.priority}
                   </span>
-                  
-                  <motion.div 
+
+                  <motion.div
                     animate={{ rotate: isOpen ? 180 : 0 }}
                     transition={springConfig}
                     className="w-10 h-10 rounded-full bg-[#242424] flex items-center justify-center border border-[#e9eae4] group-hover:bg-[#242424] transition-colors"
@@ -96,7 +96,7 @@ export default function QuestsPage() {
               {/* Contenu détaillé (Hyper-Pédagogie Bento Grid) */}
               <AnimatePresence initial={false}>
                 {isOpen && (
-                  <motion.div 
+                  <motion.div
                     initial={{ height: 0, opacity: 0 }}
                     animate={{ height: "auto", opacity: 1 }}
                     exit={{ height: 0, opacity: 0 }}
@@ -114,7 +114,7 @@ export default function QuestsPage() {
                             {q.details.prereq}
                           </p>
                         </div>
-                        
+
                         {/* Carte QUOI (Démarrer) */}
                         <div className="p-6 rounded-2xl bg-[#242424] border border-[#e9eae4] hover:shadow-md transition-shadow">
                           <h4 className="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-gray-400 mb-3">
@@ -130,7 +130,7 @@ export default function QuestsPage() {
                           <h4 className="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-gray-400 mb-3">
                             <i className="fa-solid fa-list-check text-purple-400"></i> Comment procéder (Étape par Étape)
                           </h4>
-                          <div 
+                          <div
                             className="text-[#e9eae4] font-[var(--font-lora)] leading-relaxed prose prose-p:my-2 prose-strong:text-[#e9eae4] max-w-none"
                             dangerouslySetInnerHTML={{ __html: q.details.process }}
                           />
